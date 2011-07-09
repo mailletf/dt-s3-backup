@@ -93,6 +93,9 @@ STATIC_OPTIONS="--full-if-older-than 14D --s3-use-new-style"
 CLEAN_UP_TYPE="remove-all-but-n-full"
 CLEAN_UP_VARIABLE="2"
 
+# Temporary folder for duplicity to use during backup
+#TEMP_FOLDER="--tempdir=/tmp"
+
 # LOGFILE INFORMATION DIRECTORY
 # Provide directory for logfile, ownership of logfile, and verbosity level.
 # I run this script as root, but save the log files under my user name --
@@ -228,7 +231,7 @@ duplicity_cleanup()
 
 duplicity_backup()
 {
-  ${ECHO} ${DUPLICITY} ${OPTION} ${VERBOSITY} ${STATIC_OPTIONS} \
+  ${ECHO} ${DUPLICITY} ${OPTION} ${VERBOSITY} ${STATIC_OPTIONS} ${TEMP_FOLDER} \
   --encrypt-key=${GPG_KEY} \
   --sign-key=${GPG_KEY} \
   ${EXCLUDE} \
